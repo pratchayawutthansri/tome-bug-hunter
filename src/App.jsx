@@ -11,6 +11,7 @@ import { scanCode } from './scanner/sastEngine';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState('dashboard');
+  const [isFullEditor, setIsFullEditor] = useState(false);
   
   // Environment Configurations (Chaos Parameters)
   const [config, setConfig] = useState({
@@ -544,7 +545,7 @@ ${logEntries}
         <div className="workspace-body">
           {activeTab === 'dashboard' ? (
             /* Simulator / Dashboard Grid Layout */
-            <div className="dashboard-layout">
+            <div className={`dashboard-layout ${isFullEditor ? 'full-editor-view' : ''}`}>
               {/* Left Column: Code Editor & SAST scan details (3/5 grid width) */}
               <div className="editor-column">
                 <CodeEditor
@@ -565,15 +566,19 @@ ${logEntries}
                   uploadedFile={uploadedFile}
                   onFileUpload={handleFileUpload}
                   onFileClear={handleFileClear}
+                  isFullEditor={isFullEditor}
+                  setIsFullEditor={setIsFullEditor}
                 />
               </div>
 
               {/* Right Column: Infrastructure Map, Dials, & Terminal Output (2/5 grid width) */}
-              <div className="simulation-column">
-                <ControlPanel config={config} setConfig={setConfig} generateQAAuditReport={generateQAAuditReport} />
-                <Architecture config={config} />
-                <Console logs={logs} setLogs={setLogs} />
-              </div>
+              {!isFullEditor && (
+                <div className="simulation-column">
+                  <ControlPanel config={config} setConfig={setConfig} generateQAAuditReport={generateQAAuditReport} />
+                  <Architecture config={config} />
+                  <Console logs={logs} setLogs={setLogs} />
+                </div>
+              )}
             </div>
           ) : (
             /* Docs / Knowledge Base Tab Layout */

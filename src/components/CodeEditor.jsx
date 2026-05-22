@@ -20,7 +20,9 @@ export default function CodeEditor({
   onInjectFuzz,
   uploadedFile,
   onFileUpload,
-  onFileClear
+  onFileClear,
+  isFullEditor,
+  setIsFullEditor
 }) {
   const [codeType, setCodeType] = useState('vulnerable'); // 'vulnerable' | 'secure'
   const [isDragging, setIsDragging] = useState(false);
@@ -285,34 +287,55 @@ export default function CodeEditor({
       </div>
 
       {/* Editor Tab Bar */}
-      <div className="editor-tab-bar" style={{ display: 'flex', gap: '8px', borderBottom: '1px solid var(--border-glass)', paddingBottom: '12px' }}>
+      <div className="editor-tab-bar" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid var(--border-glass)', paddingBottom: '12px' }}>
+        <div style={{ display: 'flex', gap: '8px' }}>
+          <button
+            onClick={() => setEditorTab('code')}
+            className="template-switch-btn"
+            style={{
+              backgroundColor: editorTab === 'code' ? 'rgba(16, 185, 129, 0.15)' : 'transparent',
+              borderColor: editorTab === 'code' ? 'var(--primary)' : 'transparent',
+              borderWidth: '1px',
+              borderStyle: 'solid',
+              color: editorTab === 'code' ? 'var(--text-primary)' : 'var(--text-secondary)',
+              cursor: 'pointer'
+            }}
+          >
+            💻 Source Code
+          </button>
+          <button
+            onClick={() => setEditorTab('tests')}
+            className="template-switch-btn"
+            style={{
+              backgroundColor: editorTab === 'tests' ? 'rgba(16, 185, 129, 0.15)' : 'transparent',
+              borderColor: editorTab === 'tests' ? 'var(--primary)' : 'transparent',
+              borderWidth: '1px',
+              borderStyle: 'solid',
+              color: editorTab === 'tests' ? 'var(--text-primary)' : 'var(--text-secondary)',
+              cursor: 'pointer'
+            }}
+          >
+            🧪 Unit Tests
+          </button>
+        </div>
+
         <button
-          onClick={() => setEditorTab('code')}
+          onClick={() => setIsFullEditor(!isFullEditor)}
           className="template-switch-btn"
           style={{
-            backgroundColor: editorTab === 'code' ? 'rgba(16, 185, 129, 0.15)' : 'transparent',
-            borderColor: editorTab === 'code' ? 'var(--primary)' : 'transparent',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '6px',
+            backgroundColor: isFullEditor ? 'rgba(16, 185, 129, 0.15)' : 'rgba(255, 255, 255, 0.05)',
+            borderColor: isFullEditor ? 'var(--primary)' : 'var(--border-glass)',
             borderWidth: '1px',
             borderStyle: 'solid',
-            color: editorTab === 'code' ? 'var(--text-primary)' : 'var(--text-secondary)',
-            cursor: 'pointer'
+            color: 'var(--text-primary)',
+            cursor: 'pointer',
+            padding: '6px 12px'
           }}
         >
-          💻 Source Code
-        </button>
-        <button
-          onClick={() => setEditorTab('tests')}
-          className="template-switch-btn"
-          style={{
-            backgroundColor: editorTab === 'tests' ? 'rgba(16, 185, 129, 0.15)' : 'transparent',
-            borderColor: editorTab === 'tests' ? 'var(--primary)' : 'transparent',
-            borderWidth: '1px',
-            borderStyle: 'solid',
-            color: editorTab === 'tests' ? 'var(--text-primary)' : 'var(--text-secondary)',
-            cursor: 'pointer'
-          }}
-        >
-          🧪 Unit Tests
+          {isFullEditor ? '🗗 Split View' : '🗖 Full Width Code'}
         </button>
       </div>
 

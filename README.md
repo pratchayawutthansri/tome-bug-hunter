@@ -1,8 +1,8 @@
-# Tome Bug Hunter & Environment Simulator (TBH-ES) v2.3 🛡️⚡
+# Tome Bug Hunter & Environment Simulator (TBH-ES) v2.4 🛡️⚡
 
-**Tome Bug Hunter & Environment Simulator (TBH-ES) v2.3** is a state-of-the-art, fully client-side educational sandbox and utility tool designed to bridge the gap between static application security testing (SAST), runtime infrastructure resilience (Chaos Engineering), and Test-Driven Development (TDD) validation. Built as a high-fidelity Single Page Application (SPA) using React, Vite, and custom Vanilla CSS, it enables developers to analyze source code vulnerabilities, trigger simulated infrastructure failure states, write and execute unit tests, and observe system health in real-time.
+**Tome Bug Hunter & Environment Simulator (TBH-ES) v2.4** is a state-of-the-art, fully client-side educational sandbox and utility tool designed to bridge the gap between static application security testing (SAST), runtime infrastructure resilience (Chaos Engineering), and Test-Driven Development (TDD) validation. Built as a high-fidelity Single Page Application (SPA) using React, Vite, and custom Vanilla CSS, it enables developers to analyze source code vulnerabilities, trigger simulated infrastructure failure states, write and execute unit tests, and observe system health in real-time.
 
-With version 2.3, the system introduces a fully redesigned responsive layout, independent scrolling panels, a full-height code workspace, custom local file uploading, interactive SAST engine alignment, and an automated QA Audit Report generator.
+With version 2.4, the system introduces a **Full-Width Code Workspace Toggle** to hide the environment panel for focused coding, layout scrolling fixes that resolve nested scrolling deadlocks, custom local file uploading, interactive SAST engine alignment, and an automated QA Audit Report generator.
 
 ---
 
@@ -58,8 +58,9 @@ Includes side-by-side comparisons of **Vulnerable vs. Secure** implementations f
     4.  **Mitigation Summary:** Outlined parameterization, sanitization, and architectural mitigations.
 *   **Sidebar Severity Badges:** Displays color-coded risk levels next to presets in the sidebar (e.g., `[CRITICAL]` in red, `[HIGH]` or `[MEDIUM]` in orange/yellow).
 
-### 6. Interactive SAST Editor Linkage & Scroll Sync (v2.3 Improvements)
-*   **Smooth Gutter Wheel Scroll Sync:** Gutter line numbers and the code editor textarea are synchronized. The scroll wheel event is refined so that it only blocks parent page scroll propagation while the textarea is actively scrolling. Once boundaries are reached, scrolling naturally bubbles up.
+### 6. Interactive SAST Editor Linkage & Scroll UX (v2.4 Layout & Scroll Fixes)
+*   **Full Width Code View Toggle:** Users can click the **🗖 Full Width Code** button inside the editor tab bar to expand the code editor to cover the entire screen width, hiding the chaos simulator environment panel for a cleaner, wider workspace. Clicking it again instantly restores the split-screen layout.
+*   **Elimination of Nested Scroll Locks:** The editor panel has been completely refactored from a nested scroll layout into a modern viewport-fitted flexbox container. The main editor column does not scroll anymore; instead, the code textarea and the SAST warnings section scroll independently, ensuring smooth page navigation and removing scroll hijacks.
 *   **Auto-Scroll & Line Highlighting:** Clicking any Static Code Analysis (SAST) finding card at the bottom of the editor automatically scrolls the textarea viewport smoothly to focus on the target code line.
 *   **Text Selection Range:** Focuses the editor textarea and selects the exact code text of the vulnerable line using HTML5 `setSelectionRange()`.
 *   **Line Number Flashing:** Temporarily flashes the corresponding line number inside the gutter with a glowing emerald background animation (`@keyframes flash-line-highlight`) for 1.5 seconds.

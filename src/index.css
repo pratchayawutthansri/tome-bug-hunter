@@ -273,11 +273,14 @@ h1, h2, h3, h4, h5, h6 {
   .dashboard-layout {
     grid-template-columns: 3fr 2fr;
   }
+  .dashboard-layout.full-editor-view {
+    grid-template-columns: 1fr;
+  }
 }
 
 .editor-column {
   height: 100%;
-  overflow-y: auto;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   padding-right: 6px;
@@ -763,9 +766,11 @@ h1, h2, h3, h4, h5, h6 {
   padding: 24px;
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 16px;
   flex: 1;
   min-height: 0;
+  height: 100%;
+  overflow: hidden;
 }
 
 .editor-header {
@@ -856,7 +861,7 @@ h1, h2, h3, h4, h5, h6 {
 .editor-workspace {
   position: relative;
   flex: 1;
-  min-height: 480px;
+  min-height: 200px;
   background-color: var(--bg-slate-950);
   border-radius: 12px;
   overflow: hidden;
